@@ -15,6 +15,6 @@ To install Sup Meme Pro, follow these steps:
 
 1. Clone the repository from GitHub:
 2. ```bash
-    git clone https://github.com/your-username/sup-meme-pro.git
+    git clone https://github.com/Franki1607/sup-meme-pro.git
    ```
 3. Open index.html in your web browser.
