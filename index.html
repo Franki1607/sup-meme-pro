@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Mèmes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+</head>
+<body>
+    <main class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-5 order-lg-1 order-2">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white py-3">
+                            <h2 class="h5 mb-0 fw-bold"><i class="fas fa-image me-2"></i>Image</h2>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-grid">
+                                <label for="imageUpload" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-upload me-2"></i> Télécharger une image
+                                </label>
+                                <input type="file" id="imageUpload" accept="image/*" class="d-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white py-3">
+                            <h2 class="h5 mb-0 fw-bold"><i class="fas fa-font me-2"></i>Texte</h2>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="mb-4">
+                                <input type="text" id="topText" class="form-control form-control-lg mb-3" placeholder="Texte du haut">
+                                <input type="text" id="bottomText" class="form-control form-control-lg mb-3" placeholder="Texte du bas">
+                                <div class="input-group mb-2">
+                                    <input type="text" id="customText" class="form-control form-control-lg" placeholder="Texte personnalisé">
+                                    <button id="addCustomText" class="btn btn-secondary btn-lg">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="fontSize" class="form-label fw-bold">Taille:</label>
+                                    <input type="range" id="fontSize" class="form-range" min="12" max="80" value="40">
+                                    <div class="d-flex justify-content-between">
+                                        <small>Petit</small>
+                                        <small>Grand</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="textColor" class="form-label fw-bold">Couleur:</label>
+                                    <input type="color" id="textColor" class="form-control form-control-color w-100" value="#ffffff">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="strokeColor" class="form-label fw-bold">Contour:</label>
+                                    <input type="color" id="strokeColor" class="form-control form-control-color w-100" value="#000000">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="strokeWidth" class="form-label fw-bold">Épaisseur:</label>
+                                    <input type="range" id="strokeWidth" class="form-range" min="0" max="5" value="2" step="0.1">
+                                    <div class="d-flex justify-content-between">
+                                        <small>Fin</small>
+                                        <small>Épais</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white py-3">
+                            <h2 class="h5 mb-0 fw-bold"><i class="fas fa-cogs me-2"></i>Actions</h2>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <button id="downloadBtn" class="btn btn-primary btn-lg w-100">
+                                        <i class="fas fa-download me-2"></i> Télécharger
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="shareBtn" class="btn btn-secondary btn-lg w-100">
+                                        <i class="fas fa-share-alt me-2"></i> Partager
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="saveToGalleryBtn" class="btn btn-primary btn-lg w-100">
+                                        <i class="fas fa-save me-2"></i> Sauvegarder
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="resetBtn" class="btn btn-secondary btn-lg w-100">
+                                        <i class="fas fa-trash me-2"></i> Réinitialiser
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 order-lg-2 order-1 mb-4 mb-lg-0">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-primary text-white py-3">
+                            <h2 class="h5 mb-0 fw-bold">Aperçu</h2>
+                        </div>
+                        <div class="card-body p-4 d-flex justify-content-center align-items-center canvas-container">
+                            <canvas id="memeCanvas" width="600" height="600"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-5">
+                <div class="card-header bg-primary text-white py-3">
+                    <h2 class="h5 mb-0 fw-bold"><i class="fas fa-images me-2"></i>Galerie de Mèmes</h2>
+                </div>
+                <div class="card-body p-4">
+                    <div id="memeGallery" class="row g-4"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="shareModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-share-alt me-2"></i>Partager votre mème</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-facebook share-btn btn-lg" data-platform="facebook">
+                            <i class="fab fa-facebook me-2"></i> Partager sur Facebook
+                        </button>
+                        <button class="btn btn-x share-btn btn-lg" data-platform="twitter">
+                            <i class="fab fa-x-twitter me-2"></i> Partager sur X
+                        </button>
+                        <button class="btn btn-whatsapp share-btn btn-lg" data-platform="whatsapp">
+                            <i class="fab fa-whatsapp me-2"></i> Partager sur WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

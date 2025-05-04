@@ -1,0 +1,197 @@
+:root {
+  --primary-color: #3d2683;
+  --primary-hover: #2d1c62;
+  --secondary-color: #f15b4e;
+  --secondary-hover: #e04a3d;
+  --light-bg: #f8f9fa;
+  --dark-text: #333;
+  --border-radius: 0.5rem;
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+body {
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+.card {
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--box-shadow);
+}
+
+.card-header {
+  border-bottom: none;
+}
+
+.canvas-container {
+  min-height: 500px;
+  background-color: #fff;
+  background-image: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0),
+    linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--secondary-hover);
+  border-color: var(--secondary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-facebook {
+  background-color: #3b5998;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-facebook:hover {
+  background-color: #2d4373;
+  transform: translateY(-2px);
+}
+
+.btn-twitter {
+  background-color: #1da1f2;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-twitter:hover {
+  background-color: #0c85d0;
+  transform: translateY(-2px);
+}
+
+.btn-x {
+  background-color: #000000;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-x:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+  background-color: #25d366;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1da851;
+  transform: translateY(-2px);
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 200px;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+}
+
+.gallery-item .overlay button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item .overlay button:hover {
+  transform: scale(1.2);
+}
+
+.form-control:focus,
+.form-range:focus,
+.form-control-color:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(61, 38, 131, 0.25);
+}
+
+.form-control-color {
+  height: 38px;
+}
+
+@media (max-width: 991.98px) {
+  .canvas-container {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .canvas-container {
+    min-height: 350px;
+  }
+}
